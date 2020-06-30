@@ -28,12 +28,14 @@ export default {
 <style lang="scss" scoped>
 @import "@/scss/_tokens.scss";
 
+$navbarHeight: 50px;
+
 nav {
-  height: 50px;
+  height: $navbarHeight;
   background-color: black;
   display: flex;
   align-items: center;
-  padding: 0 40px;
+  padding: 0 $spacing-large;
 
   img {
     margin-right: $spacing-large;
@@ -41,13 +43,13 @@ nav {
 
   a {
     color: #fff;
-    padding: 14px;
+    padding: $spacing-medium;
     margin: 0 $spacing-medium;
     text-decoration: none;
 
-    &.router-link-exact-active {
+    &.router-link-active {
       color: #fff;
-      border-bottom: 3px solid white;
+      border-bottom: $spacing-x-small solid white;
     }
 
     &:hover {

@@ -12,7 +12,7 @@ export const menu = [
     label: "Markets"
   },
   {
-    to: "/",
+    to: "/exchanges",
     label: "Exchanges"
   },
   {

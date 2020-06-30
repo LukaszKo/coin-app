@@ -8,18 +8,18 @@
     </Header>
 
     <div class="list">
-      <div class="table__headers">
+      <div class="list__headers">
         <div
-          class="table__headers__item"
+          class="list__headers__item"
           v-for="header in tableHeaders"
           :key="header"
         >
           {{ header }}
         </div>
       </div>
-      <div class="table__content">
+      <div class="list__content">
         <ListItem
-          v-for="(item, index) in paginatedList"
+          v-for="(item, index) in listWithPagination"
           :key="item.id + index"
           :item="item"
           @click="goToEditPage(item.id)"
@@ -52,33 +52,47 @@ export default {
       list: [],
       all: [],
       page: 0,
-      limit: 10
+      ITEMS_LIMIT: 10
     };
   },
   computed: {
     count() {
       return this.all.length;
     },
-    limited() {
-      return this.page ? (this.page + 1) * 10 : 10;
+    nextPackageLimit() {
+      return this.page ? (this.page + 1) * this.ITEMS_LIMIT : this.ITEMS_LIMIT;
     },
-    paginatedList() {
+    previousPackageLimit() {
+      return this.page * this.ITEMS_LIMIT;
+    },
+    listWithPagination() {
       return this.all.filter(
-        (item, index) => index >= this.page * 10 && index < this.limited
+        (item, index) =>
+          index >= this.previousPackageLimit && index < this.nextPackageLimit
       );
     }
   },
-  async created() {
+  created() {
     const page = this.$router.currentRoute.query.page;
     if (page) {
       this.page = page - 1;
     }
-
-    const { data } = await axios.get("tickers?quotes=USD,BTC,ETH");
-    this.all = data;
-    this.updateQuery();
+    this.getTickers();
   },
   methods: {
+    async getTickers() {
+      try {
+        this.$emit("onAsync", true);
+        const { data } = await axios.get("tickers?quotes=USD,BTC,ETH");
+        this.all = data;
+        this.updateQuery();
+        // eslint-disable-next-line no-useless-catch
+      } catch (error) {
+        throw error;
+      } finally {
+        this.$emit("onAsync", false);
+      }
+    },
     goToEditPage(id) {
       this.$router.push({ name: "Details", params: { id } });
     },
@@ -90,7 +104,10 @@ export default {
       this.$router.replace({ query: { page: this.page + 1 } }).catch(() => {});
     },
     updateList() {
-      this.list = this.all.slice(this.limit * this.page, this.limit);
+      this.list = this.all.slice(
+        this.ITEMS_LIMIT * this.page,
+        this.ITEMS_LIMIT
+      );
     }
   }
 };
@@ -102,22 +119,16 @@ export default {
   text-align: left;
 }
 
-.panel {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
 .list {
   margin: $spacing-large 0;
   min-height: 70vh;
-}
-
-.table {
   &__headers {
     display: flex;
     justify-content: space-between;
+
+    @include breakpoint-down(sm) {
+      display: block;
+    }
 
     &__item {
       flex: 1;

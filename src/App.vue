@@ -1,15 +1,22 @@
 <template>
   <div id="app">
+    <Loader v-if="showLoader" />
     <Navbar />
-    <router-view class="container" />
+    <router-view class="container" @onAsync="val => (showLoader = val)" />
     <Footer />
   </div>
 </template>
 <script>
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Loader from "@/components/Loader";
 export default {
-  components: { Navbar, Footer }
+  components: { Navbar, Footer, Loader },
+  data() {
+    return {
+      showLoader: false
+    };
+  }
 };
 </script>
 <style lang="scss">

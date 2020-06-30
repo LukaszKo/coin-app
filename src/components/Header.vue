@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <slot />
-    <div class="searchbox">
+    <div class="header__searchbox">
       <SearchInput placeholder="Search" />
       <img src="../assets/search.png" />
     </div>
@@ -21,13 +21,13 @@ export default {
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-}
 
-.searchbox {
-  display: flex;
+  &__searchbox {
+    display: flex;
 
-  img {
-    margin-left: $spacing-small;
+    img {
+      margin-left: $spacing-small;
+    }
   }
 }
 </style>

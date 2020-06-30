@@ -22,3 +22,7 @@ $spacing-x-large: map-get($spaces, "xl");
       }
     }
   }
+  
+
+  $text-color-green: map-get($text-colors, green);
+  $text-color-red:map-get($text-colors, red);

@@ -21,16 +21,25 @@
 }
 
 .mt {
-    &-1 {
-      margin-top: $spacing-x-small;
-    }
-    &-2 {
-      margin-top: $spacing-small;
-    }
-    &-3 {
-      margin-top: $spacing-medium;
-    }
-    &-4 {
-      margin-top: $spacing-large;
-    }
+  &-1 {
+    margin-top: $spacing-x-small;
   }
+  &-2 {
+    margin-top: $spacing-small;
+  }
+  &-3 {
+    margin-top: $spacing-medium;
+  }
+  &-4 {
+    margin-top: $spacing-large;
+  }
+}
+
+.text-color {
+  &--green {
+    color: $text-color-green;
+  }
+  &--red {
+    color: $text-color-red;
+  }
+}
