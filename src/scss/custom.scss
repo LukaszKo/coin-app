@@ -1,0 +1,36 @@
+@import "_maps";
+@import "_tokens";
+
+.strong {
+  font-weight: 600;
+}
+
+.mr {
+  &-1 {
+    margin-right: $spacing-x-small;
+  }
+  &-2 {
+    margin-right: $spacing-small;
+  }
+  &-3 {
+    margin-right: $spacing-medium;
+  }
+  &-4 {
+    margin-right: $spacing-large;
+  }
+}
+
+.mt {
+    &-1 {
+      margin-top: $spacing-x-small;
+    }
+    &-2 {
+      margin-top: $spacing-small;
+    }
+    &-3 {
+      margin-top: $spacing-medium;
+    }
+    &-4 {
+      margin-top: $spacing-large;
+    }
+  }

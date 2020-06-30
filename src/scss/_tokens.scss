@@ -1,0 +1,24 @@
+@import 'maps';
+
+$spacing-xx-small: map-get($spaces, "xxs");
+$spacing-x-small: map-get($spaces, "xs");
+$spacing-small: map-get($spaces, "s");
+$spacing-medium: map-get($spaces, "m");
+$spacing-large: map-get($spaces, "l");
+$spacing-x-large: map-get($spaces, "xl");
+
+@mixin breakpoint-up ($breakpoint) {
+    @if map-has-key($breakpoints, $breakpoint) {
+      @media (min-width: #{map-get($breakpoints, $breakpoint)}) {
+        @content;
+      }
+    }
+  }
+  
+  @mixin breakpoint-down ($breakpoint) {
+    @if map-has-key($breakpoints, $breakpoint) {
+      @media (max-width: #{map-get($breakpoints, $breakpoint)}) {
+        @content;
+      }
+    }
+  }
